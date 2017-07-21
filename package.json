@@ -16,7 +16,7 @@
     "web",
     "api\"]"
   ],
-  "author": "Madhu madhub081011@gmail.com",
+  "author": "Madhu @madhuddeveloper",
   "license": "ISC",
   "devDependencies": {
     "nodemon": "^1.11.0"
