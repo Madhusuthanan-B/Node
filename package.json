@@ -1,0 +1,24 @@
+{
+  "name": "node-webapi",
+  "version": "1.0.0",
+  "description": "A node web api to connect with mongodb",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "body-parser": "~1.0.1",
+    "express": "~4.0.0",
+    "mongoose": "~3.6.13"
+  },
+  "keywords": [
+    "[\"Node",
+    "web",
+    "api\"]"
+  ],
+  "author": "Madhu madhub081011@gmail.com",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^1.11.0"
+  }
+}
