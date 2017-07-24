@@ -3,9 +3,13 @@ var app = express();
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var Users = require('./app/models/users');
+var nconf = require('nconf');
+nconf.use('file', { file: './config.json' });
+nconf.load();
 var router = express.Router();
 
-mongoose.connect('mongodb://localhost:27017/UsersDB');
+mongoose.connect(nconf.get('MongoDBPort') + nconf.get('DBName'));
+
 app.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
@@ -14,7 +18,7 @@ app.use((req, res, next) => {
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-var port = process.env.PORT || 8080;
+var port = process.env.PORT || nconf.get('default_port');
 
 router.use((req, res, next) => {
     console.log('Working!');
@@ -55,4 +59,4 @@ app.use('/api', router);
 
 app.listen(port);
 console.log('The app is running on port: ' + port);
-console.log('Active end points: http://localhost:8080/api/users');
+console.log(`active end points: http://localhost:${port}/api/users`);
