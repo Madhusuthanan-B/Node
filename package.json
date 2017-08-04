@@ -2,10 +2,10 @@
   "name": "node-webapi",
   "version": "1.0.0",
   "description": "A node web api to connect with mongodb",
-  "main": "server.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node index.js"
   },
   "dependencies": {
     "body-parser": "~1.0.1",
