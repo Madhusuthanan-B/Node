@@ -4,8 +4,7 @@ var mongodb = require('mongodb');
 var MongoClient = mongodb.MongoClient;
 var bodyParser = require('body-parser');
 var router = express.Router();
-// var url = 'mongodb://localhost:27017/UsersDB';
-var url =  process.env.MONGOLAB_URI;
+var url =  process.env.MONGOLAB_URI || 'mongodb://localhost:27017/UsersDB';
 
 app.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
