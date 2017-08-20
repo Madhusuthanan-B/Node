@@ -1,7 +1,40 @@
 var express = require('express');
 var app = express();
-var port = process.env.PORT || 3000;
-app.get('/', function(req, res) {
-    res.send('Welcome to my first node heroku app');
+var mongodb = require('mongodb');
+var MongoClient = mongodb.MongoClient;
+var bodyParser = require('body-parser');
+var router = express.Router();
+// var url = 'mongodb://localhost:27017/UsersDB';
+var url =  process.env.MONGOLAB_URI;
+
+app.use((req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
 });
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
+var port = process.env.PORT || 3000;
+
+app.get('/', function (req, res) {
+    MongoClient.connect(url, function (err, db) {
+        if (err) {
+            res.send('Connection failed');
+        } else {
+            findDocuments(db, function (result) {
+                res.send(result);
+                db.close();
+            });
+        }
+    });
+
+});
+
+var findDocuments = function (db, callback) {
+    var collection = db.collection('Users');
+    collection.find({}).toArray(function (err, docs) {
+        callback(docs);
+    });
+}
 app.listen(port);
