@@ -21,7 +21,7 @@ app.get('/', function (req, res) {
         if (err) {
             res.send('Connection failed');
         } else {
-            findDocuments(db, function (result) {
+            findUsers(db, function (result) {
                 res.send(result);
                 db.close();
             });
@@ -30,7 +30,7 @@ app.get('/', function (req, res) {
 
 });
 
-var findDocuments = function (db, callback) {
+var findUsers = function (db, callback) {
     var collection = db.collection('Users');
     collection.find({}).toArray(function (err, docs) {
         callback(docs);
